@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './styles/App.scss';
+import './styles/form.scss';
+
+// custom component
+import RegisterContainer from './components/RegisterContainer';
+import CartContainer from './components/CartContainer';
+// import ProgressBar from './components/stepProgressBar';
+// import StepContent from './components/stepContent';
+// import StepControl from './components/stepControl';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='container-fluid'>
+        <main className='site-main'>
+          <div className='main-container d-flex flex-row '>
+            <RegisterContainer />
+            <CartContainer />
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
 
