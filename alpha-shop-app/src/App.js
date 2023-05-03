@@ -1,25 +1,29 @@
-// import logo from './logo.svg';
-// import './styles/App.scss';
-import './styles/form.scss';
+import './styles/main.scss';
 
 // custom component
-import RegisterContainer from './components/RegisterContainer';
-import CartContainer from './components/CartContainer';
-// import ProgressBar from './components/stepProgressBar';
-// import StepContent from './components/stepContent';
-// import StepControl from './components/stepControl';
+import Header from './components/Header/Header';
+import RegisterContainer from './components/RegisterContainer/RegisterContainer';
+import CartContainer from './components/CarContainer/CartContainer';
+import ProgressBar from './components/StepProgressBar/StepProgressBar';
+import StepContent from './components/StepContent/StepContent';
+import StepControl from './components/StepControl/StepControl';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <>
-      <div className='container-fluid'>
-        <main className='site-main'>
-          <div className='main-container d-flex flex-row '>
-            <RegisterContainer />
-            <CartContainer />
-          </div>
-        </main>
-      </div>
+      <Header />
+      <main className='site-main'>
+        <div className='main-container d-flex flex-row '>
+          <RegisterContainer>
+            <ProgressBar />
+            <StepContent />
+          </RegisterContainer>
+          <CartContainer />
+          <StepControl />
+        </div>
+      </main>
+      <Footer />
     </>
   );
 }
