@@ -6,7 +6,17 @@ import iconMoon from '../../assets/icons/moon.svg';
 // import iconSun from '../../assets/icons/sun.svg';
 import iconLogo from '../../assets/icons/logo.svg';
 
-export default function Header() {
+export default function Header({ toggleTheme }) {
+  // const openDark = (event) => {
+  //   dataTheme='light'
+  //   document.body.classList.add('dark');
+  //   this.setState({ showModal: true });
+  // };
+  // hideModal = (event) => {
+  //   document.body.classList.remove('modal-open');
+  //   this.setState({ showModal: false });
+  // };
+
   return (
     <>
       {/* <!-- header --> */}
@@ -74,6 +84,7 @@ export default function Header() {
                   src={iconMoon}
                   alt='icon of Moon'
                   className='nav-icon cursor-point'
+                  onClick={toggleTheme}
                 ></img>
                 {/* <!-- sun --> */}
                 {/* <img

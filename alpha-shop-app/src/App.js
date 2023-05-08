@@ -1,8 +1,12 @@
 //
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // css
 import './styles/main.scss';
+
+//dark theme setting
+import React from 'react';
+// import useLocalStorage from 'use-local-storage';
 
 // custom component
 import Header from './components/Header/Header';
@@ -14,7 +18,21 @@ import StepControl from './components/StepControl/StepControl';
 import Footer from './components/Footer/Footer';
 
 function App() {
+  //change Darkmode
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      document.body.dataset.theme = 'dark';
+      setTheme('dark');
+    } else {
+      document.body.dataset.theme = 'light';
+      setTheme('light');
+    }
+    // console.log(theme);
+  };
+
   const [orderStep, setOrderStep] = useState(1);
+
   const prevStepFunc = () => {
     setOrderStep(orderStep - 1);
   };
@@ -26,30 +44,24 @@ function App() {
   };
 
   return (
-    <>
-      <Header />
+    <div className='app' data-theme={theme}>
+      <Header toggleTheme={toggleTheme} />
       <main className='site-main'>
         <div className='main-container d-flex flex-row '>
           <RegisterContainer>
             <ProgressBar orderStep={orderStep} />
-            <StepContent
-              orderStep={orderStep}
-              // isOneDone={isOneDone}
-              // isSecDone={isSecDone}
-              // isThirdDone={isThirdDone}
-            />
+            <StepContent orderStep={orderStep} />
           </RegisterContainer>
           <CartContainer />
           <StepControl
             orderStep={orderStep}
-            setOrderStep={setOrderStep}
             prevStepFunc={prevStepFunc}
             nextStepFunc={nextStepFunc}
           />
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

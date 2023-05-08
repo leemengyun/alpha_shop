@@ -1,27 +1,33 @@
+import { useState } from 'react';
+
 //import img
 import iconMinus from '../../assets/icons/minus.svg';
 import iconPlus from '../../assets/icons/plus.svg';
-import productPhoto1 from '../../assets/images/product-1.jpg';
-import productPhoto2 from '../../assets/images/product-2.jpg';
+// import productPhoto1 from '../../assets/images/product-1.jpg';
+// import productPhoto2 from '../../assets/images/product-2.jpg';
 
 const dummyShopping = [
   {
     id: '1',
     name: '貓咪罐罐',
     img: 'https://picsum.photos/300/300?text=1',
-    price: 10000,
+    price: 100,
     quantity: 2,
   },
   {
     id: '2',
     name: '貓咪干干',
     img: 'https://picsum.photos/300/300?text=2',
-    price: 20000,
+    price: 200,
     quantity: 1,
   },
 ];
 
-function ProductTemplate({ product }) {
+function ProductTemplate({
+  product,
+  onHandleIncreaseCount,
+  onHandleDecreaseCount,
+}) {
   return (
     <div className='product-container col col-12'>
       <img className='img-container' src={product.img} alt='product pic 1' />
@@ -33,17 +39,24 @@ function ProductTemplate({ product }) {
               src={iconMinus}
               alt='icon of minus'
               className='product-action minus'
+              onClick={() => {
+                onHandleDecreaseCount(product.id);
+              }}
             ></img>
             <span className='product-count'>{product.quantity}</span>
             <img
               src={iconPlus}
               alt='icon of plus'
               className='product-action plus'
+              onClick={() => {
+                onHandleIncreaseCount(product.id);
+              }}
+              // onClick={onHandleDecreaseCount}
             ></img>
           </div>
         </div>
         <div className='price'>
-          {'$ ' + product.price.toLocaleString('en-US')}
+          {'$ ' + (product.price * product.quantity).toLocaleString('en-US')}
         </div>
       </div>
     </div>
@@ -51,6 +64,67 @@ function ProductTemplate({ product }) {
 }
 
 export default function CartContainer() {
+  const [shopping, setShopping] = useState(dummyShopping);
+
+  function handleIncreaseCount(productId) {
+    // console.log(productId);
+    setShopping(
+      shopping.map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          };
+        } else {
+          return product;
+        }
+      })
+    );
+  }
+
+  function handleDecreaseCount(productId) {
+    let nextShopping = shopping.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          quantity: product.quantity - 1,
+        };
+      } else {
+        return product;
+      }
+    });
+
+    nextShopping = nextShopping.filter((q) => {
+      return q.quantity > 0;
+    });
+
+    setShopping(nextShopping);
+  }
+  function calculatePrice() {
+    let totalPrice = 0;
+    let nextCalculate = shopping.map((product) => {
+      return product.price * product.quantity;
+    });
+
+    // console.log(nextCalculate);
+
+    nextCalculate.forEach((product) => {
+      totalPrice += product;
+    });
+
+    return totalPrice;
+  }
+  const totalPrice = calculatePrice();
+
+  // function calculateDelivery() {
+  //   let deliveryPrice = 499;
+  //   if (totalPrice > 1200) {
+  //     deliveryPrice = 0;
+  //   }
+  // }
+
+  // const deliveryFee = calculateDelivery();
+
   return (
     <>
       {/* <!-- cart --> */}
@@ -112,20 +186,30 @@ export default function CartContainer() {
               <div className='price'>$ 2,000</div>
             </div>
           </div> */}
-
           {/* -- 依data渲染dummyShopping項目 -- */}
-          {dummyShopping.map((product) => {
-            return <ProductTemplate product={product} key={product.id} />;
+
+          {shopping.map((product) => {
+            return (
+              <ProductTemplate
+                product={product}
+                key={product.id}
+                onHandleIncreaseCount={handleIncreaseCount}
+                onHandleDecreaseCount={handleDecreaseCount}
+              />
+            );
           })}
         </section>
 
         <section className='cart-info shipping col col-12'>
           <div className='text'>運費</div>
-          <div className='price'>299</div>
+          <div className='price'>
+            {totalPrice < 1200 && totalPrice !== 0 ? 499 : '免費'}
+          </div>
         </section>
         <section className='cart-info total col col-12'>
           <div className='text'>小計</div>
-          <div className='price'>$ 4,299</div>
+          {/* <div className='price'>$ 4,299</div> */}
+          <div className='price'>{totalPrice}</div>
         </section>
       </section>
     </>

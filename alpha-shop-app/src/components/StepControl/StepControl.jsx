@@ -1,14 +1,9 @@
 //import img
-import { useState } from 'react';
+// import { useState } from 'react';
 import iconLeftArrow from '../../assets/icons/left-arrow.svg';
 import iconRightArrow from '../../assets/icons/right-arrow.svg';
 
-export default function StepControl({
-  orderStep,
-  setOrderStep,
-  prevStepFunc,
-  nextStepFunc,
-}) {
+export default function StepControl({ orderStep, prevStepFunc, nextStepFunc }) {
   return (
     <>
       {/* <!-- progress-control --> */}

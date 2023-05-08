@@ -39,6 +39,8 @@ body[data-theme='dark'] {
   --primary-black: #000000;
   --primary-white: #ffffff;
   --primary-system: var(--pink);
+  --filter-white: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
+    brightness(103%) contrast(103%);
 
   // header
   #theme-toggle > svg {
@@ -47,6 +49,21 @@ body[data-theme='dark'] {
     }
     &:nth-child(2) {
       display: inline;
+    }
+  }
+  .site-header {
+    background-color: black;
+
+    img {
+      filter: var(--filter-white);
+    }
+
+    .header-logo-container {
+      img {
+        // filter: var(--filter-white);
+        filter: invert(73%) sepia(58%) saturate(3299%) hue-rotate(301deg)
+          brightness(99%) contrast(95%);
+      }
     }
   }
 
@@ -100,6 +117,42 @@ body[data-theme='dark'] {
         &.prev {
           color: #ffffff;
         }
+        img {
+          filter: var(--filter-white);
+        }
+      }
+    }
+    img {
+      filter: var(--filter-white);
+    }
+  }
+
+  //stepProgressBar
+  section.progress-container {
+    .progress-group.active {
+      .progress-icon {
+        background-color: var(--pg-addr-bg-color);
+        border-color: var(--pg-addr-bg-color);
+        .text {
+          color: var(--done-progress-border);
+        }
+      }
+      .progress-bar {
+        border-color: var(--done-progress-border);
+      }
+      .progress-label {
+        color: var(--done-progress-border);
+      }
+    }
+  }
+
+  //footer
+  footer {
+    .footer-logo-container {
+      img {
+        // filter: var(--filter-white);
+        filter: invert(73%) sepia(58%) saturate(3299%) hue-rotate(301deg)
+          brightness(99%) contrast(95%);
       }
     }
   }

@@ -1,6 +1,6 @@
 section.cart-container {
   padding: 0px 24px;
-  margin-top: 166px;
+  margin-top: 80px;
   border: 1px solid #f0f0f5;
   border-radius: 8px;
   // custom card style
@@ -16,6 +16,9 @@ section.cart-container {
     font-size: 18px;
     line-height: 24px;
   }
+  .product-list {
+    min-height: 265px;
+  }
 }
 
 section.product-list {
@@ -29,6 +32,7 @@ section.product-list {
       width: 100px;
       height: 100px;
       margin-right: 21px;
+      border-radius: 4px;
     }
     .product-info {
       display: flex;

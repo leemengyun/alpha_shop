@@ -6,8 +6,10 @@ section.progress-container {
 
     .progress-icon {
       //-- default color--
+
       background-color: transparent;
       border: 1px solid var(--progress-undone-color);
+      box-sizing: content-box;
       .text {
         color: var(--progress-undone-color);
       }
@@ -26,6 +28,10 @@ section.progress-container {
       .progress-icon {
         background-color: var(--primary-black);
         color: var(--primary-white);
+        border-color: var(--primary-white);
+        .text {
+          color: var(--primary-white);
+        }
       }
       .progress-label {
         color: var(--primary-black);
