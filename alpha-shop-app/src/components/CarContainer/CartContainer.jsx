@@ -42,7 +42,7 @@ function ProductTemplate({
               onClick={() => {
                 onHandleDecreaseCount(product.id);
               }}
-            ></img>
+            />
             <span className='product-count'>{product.quantity}</span>
             <img
               src={iconPlus}
@@ -52,7 +52,7 @@ function ProductTemplate({
                 onHandleIncreaseCount(product.id);
               }}
               // onClick={onHandleDecreaseCount}
-            ></img>
+            />
           </div>
         </div>
         <div className='price'>
@@ -94,46 +94,33 @@ export default function CartContainer() {
       }
     });
 
-    nextShopping = nextShopping.filter((q) => {
-      return q.quantity > 0;
-    });
-
-    setShopping(nextShopping);
+    //直接把filter的直寫在setState的函式中，這樣就不用另外再重新賦值一次
+    setShopping(
+      nextShopping.filter((q) => {
+        return q.quantity > 0;
+      })
+    );
   }
   function calculatePrice() {
-    let totalPrice = 0;
-    let nextCalculate = shopping.map((product) => {
+    let initialPrice = 0;
+    let eachProductTotal = shopping.map((product) => {
       return product.price * product.quantity;
     });
-
-    // console.log(nextCalculate);
-
-    nextCalculate.forEach((product) => {
-      totalPrice += product;
-    });
-
-    return totalPrice;
+    let sumPrice = eachProductTotal.reduce(
+      (prevPrice, currentPrice) => prevPrice + currentPrice,
+      initialPrice
+    );
+    return sumPrice;
   }
   const totalPrice = calculatePrice();
 
-  // function calculateDelivery() {
-  //   let deliveryPrice = 499;
-  //   if (totalPrice > 1200) {
-  //     deliveryPrice = 0;
-  //   }
-  // }
-
-  // const deliveryFee = calculateDelivery();
-
   return (
-    <>
-      {/* <!-- cart --> */}
-      <section className='cart-container col col-lg-5 col-sm-12'>
-        <h3 className='cart-title'>購物籃</h3>
+    <section className='cart-container col col-lg-5 col-sm-12'>
+      <h3 className='cart-title'>購物籃</h3>
 
-        <section className='product-list col col-12'>
-          {/* -- 原始版型參考用 -- */}
-          {/* <div className='product-container col col-12'>
+      <section className='product-list col col-12'>
+        {/* -- 原始版型參考用 -- */}
+        {/* <div className='product-container col col-12'>
             <img
               className='img-container'
               src={productPhoto1}
@@ -147,13 +134,13 @@ export default function CartContainer() {
                     src={iconMinus}
                     alt='icon of minus'
                     className='product-action minus'
-                  ></img>
+                 />
                   <span className='product-count'>1</span>
                   <img
                     src={iconPlus}
                     alt='icon of plus'
                     className='product-action plus'
-                  ></img>
+                 />
                 </div>
               </div>
               <div className='price'>$ 2,000</div>
@@ -164,7 +151,7 @@ export default function CartContainer() {
               src={productPhoto2}
               alt='icon of product 2'
               className='img-container'
-            ></img>
+           />
             <div className='product-info'>
               <div className='product-name'>刷色直筒牛仔褲</div>
               <div className='product-control-container'>
@@ -173,45 +160,44 @@ export default function CartContainer() {
                     src={iconMinus}
                     alt='icon of minus'
                     className='product-action minus'
-                  ></img>
+                 />
                   <span className='product-count'>2</span>
 
                   <img
                     src={iconPlus}
                     alt='icon of plus'
                     className='product-action plus'
-                  ></img>
+                 />
                 </div>
               </div>
               <div className='price'>$ 2,000</div>
             </div>
           </div> */}
-          {/* -- 依data渲染dummyShopping項目 -- */}
+        {/* -- 依data渲染dummyShopping項目 -- */}
 
-          {shopping.map((product) => {
-            return (
-              <ProductTemplate
-                product={product}
-                key={product.id}
-                onHandleIncreaseCount={handleIncreaseCount}
-                onHandleDecreaseCount={handleDecreaseCount}
-              />
-            );
-          })}
-        </section>
-
-        <section className='cart-info shipping col col-12'>
-          <div className='text'>運費</div>
-          <div className='price'>
-            {totalPrice < 1200 && totalPrice !== 0 ? 499 : '免費'}
-          </div>
-        </section>
-        <section className='cart-info total col col-12'>
-          <div className='text'>小計</div>
-          {/* <div className='price'>$ 4,299</div> */}
-          <div className='price'>{totalPrice}</div>
-        </section>
+        {shopping.map((product) => {
+          return (
+            <ProductTemplate
+              product={product}
+              key={product.id}
+              onHandleIncreaseCount={handleIncreaseCount}
+              onHandleDecreaseCount={handleDecreaseCount}
+            />
+          );
+        })}
       </section>
-    </>
+
+      <section className='cart-info shipping col col-12'>
+        <div className='text'>運費</div>
+        <div className='price'>
+          {totalPrice < 1200 && totalPrice !== 0 ? 499 : '免費'}
+        </div>
+      </section>
+      <section className='cart-info total col col-12'>
+        <div className='text'>小計</div>
+        {/* <div className='price'>$ 4,299</div> */}
+        <div className='price'>{totalPrice}</div>
+      </section>
+    </section>
   );
 }

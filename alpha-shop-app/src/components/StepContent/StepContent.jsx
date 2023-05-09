@@ -16,10 +16,8 @@ function ShowSection({ orderStep }) {
 }
 export default function StepContent({ orderStep }) {
   return (
-    <>
-      <section className='form-container col col-12'>
-        <ShowSection orderStep={orderStep} />
-      </section>
-    </>
+    <section className='form-container col col-12'>
+      <ShowSection orderStep={orderStep} />
+    </section>
   );
 }
