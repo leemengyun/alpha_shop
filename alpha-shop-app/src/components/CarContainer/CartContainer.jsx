@@ -101,18 +101,12 @@ export default function CartContainer() {
       })
     );
   }
-  function calculatePrice() {
-    let initialPrice = 0;
-    let eachProductTotal = shopping.map((product) => {
-      return product.price * product.quantity;
-    });
-    let sumPrice = eachProductTotal.reduce(
-      (prevPrice, currentPrice) => prevPrice + currentPrice,
-      initialPrice
-    );
-    return sumPrice;
-  }
-  const totalPrice = calculatePrice();
+
+  // 改為Array.reduce的method來寫
+  const totalPrice = shopping.reduce(
+    (prev, current) => prev + current.price * current.quantity,
+    0
+  );
 
   return (
     <section className='cart-container col col-lg-5 col-sm-12'>

@@ -1,12 +1,7 @@
-//
 import { useState } from 'react';
 
 // css
 import './styles/main.scss';
-
-//dark theme setting
-import React from 'react';
-// import useLocalStorage from 'use-local-storage';
 
 // custom component
 import Header from './components/Header/Header';
@@ -33,10 +28,7 @@ function App() {
   const [orderStep, setOrderStep] = useState(1);
 
   const prevStepFunc = () => {
-    // setOrderStep(orderStep - 1);
-    // 使用(prevState) => prevState + - 這個prevState就會接到當下的state，也就是1
     setOrderStep((prevState) => prevState - 1);
-    // setOrderStep((prevState) => prevState - 1);
   };
   const nextStepFunc = () => {
     if (orderStep === 3) {
@@ -45,8 +37,6 @@ function App() {
     // setOrderStep(orderStep + 1);
     // 使用(prevState) => prevState + 1 這個prevState就會接到當下的state，也就是1
     setOrderStep((prevState) => prevState + 1);
-    // 而這邊的prevState，就會是2
-    // setOrderStep((prevState) => prevState + 1);
   };
 
   return (

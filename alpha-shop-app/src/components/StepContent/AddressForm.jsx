@@ -1,4 +1,4 @@
-export default function AddressForm() {
+export default function AddressForm({ userData, onHandleInputChange }) {
   return (
     <form className='col col-12'>
       <h3 className='form-title'>寄送地址</h3>
@@ -24,7 +24,14 @@ export default function AddressForm() {
         <div className='col col-12'>
           <div className='input-group input-w-lg-3 input-w-sm-full'>
             <div className='input-label'>電話</div>
-            <input type='tel' placeholder='請輸入行動電話' />
+            <input
+              type='tel'
+              placeholder='請輸入行動電話'
+              name='tel'
+              value={userData.tel}
+              // 表單切換保留處理
+              onChange={onHandleInputChange}
+            />
           </div>
           <div className='input-group input-w-lg-3 input-w-sm-full'>
             <div className='input-label'>Email</div>
@@ -71,7 +78,15 @@ export default function AddressForm() {
           </div>
           <div className='input-group input-w-lg-4 input-w-sm-full'>
             <div className='input-label'>地址</div>
-            <input type='text' placeholder='請輸入地址' />
+            <input
+              type='text'
+              placeholder='請輸入地址'
+              name='address'
+              key='address'
+              // 表單切換保留處理
+              value={userData.address || ''}
+              // onChange={onHandleInputChange}
+            />
           </div>
         </div>
       </section>
