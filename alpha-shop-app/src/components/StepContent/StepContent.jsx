@@ -1,47 +1,35 @@
-// import Button from 'react-bootstrap/Button';
-// import Form from 'react-bootstrap/Form';
-
-import { useState } from 'react';
+import React from 'react';
 
 // import component
 import AddressForm from './AddressForm';
 import DeliveryForm from './DeliveryForm';
 import PaymentForm from './PaymentForm';
 
-function ShowSection({ orderStep }) {
-  // 表單切換保留處理
-  const [userData, setUserData] = useState({
-    address: '',
-    tel: '',
-  });
-  const handleInputChange = (e) => {
-    let targetName = e.target.name;
-    let targetValue = e.target.value;
+export default function StepContent({ orderStep, submitHandler }) {
+  let addressClass = 'address';
+  let deliveryClass = 'delivery';
+  let paymentClass = 'payment';
 
-    setUserData({
-      ...userData,
-      [targetName]: targetValue,
-    });
-  };
-
+  // switch your form-container className
   if (orderStep === 1) {
-    return (
-      <AddressForm
-        key='addressForm'
-        userData={userData}
-        onHandleInputChange={handleInputChange}
-      />
-    );
+    addressClass = 'address active';
   } else if (orderStep === 2) {
-    return <DeliveryForm key='deliveryForm' />;
+    deliveryClass = 'delivery active';
   } else if (orderStep === 3) {
-    return <PaymentForm key='paymentForm' />;
+    paymentClass = 'payment active';
   }
-}
-export default function StepContent({ orderStep }) {
+
   return (
     <section className='form-container col col-12'>
-      <ShowSection orderStep={orderStep} />
+      <div className={addressClass}>
+        <AddressForm />
+      </div>
+      <div className={deliveryClass}>
+        <DeliveryForm />
+      </div>
+      <div className={paymentClass}>
+        <PaymentForm submitHandler={submitHandler} />
+      </div>
     </section>
   );
 }

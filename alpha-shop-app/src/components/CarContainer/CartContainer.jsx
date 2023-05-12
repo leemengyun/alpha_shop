@@ -1,27 +1,12 @@
+import React from 'react';
 import { useState } from 'react';
+import { dummyShopping } from './CartContext';
 
 //import img
 import iconMinus from '../../assets/icons/minus.svg';
 import iconPlus from '../../assets/icons/plus.svg';
 // import productPhoto1 from '../../assets/images/product-1.jpg';
 // import productPhoto2 from '../../assets/images/product-2.jpg';
-
-const dummyShopping = [
-  {
-    id: '1',
-    name: '貓咪罐罐',
-    img: 'https://picsum.photos/300/300?text=1',
-    price: 100,
-    quantity: 2,
-  },
-  {
-    id: '2',
-    name: '貓咪干干',
-    img: 'https://picsum.photos/300/300?text=2',
-    price: 200,
-    quantity: 1,
-  },
-];
 
 function ProductTemplate({
   product,

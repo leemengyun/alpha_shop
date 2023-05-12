@@ -1,3 +1,5 @@
+import React from 'react';
+
 //import img
 import iconToggle from '../../assets/icons/toggle.svg';
 import iconSearch from '../../assets/icons/search.svg';

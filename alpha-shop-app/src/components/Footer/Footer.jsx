@@ -1,3 +1,5 @@
+import React from 'react';
+
 //import img
 import iconLogo from '../../assets/icons/logo.svg';
 

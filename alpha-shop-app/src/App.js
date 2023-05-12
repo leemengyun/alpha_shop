@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 // css
@@ -39,14 +40,24 @@ function App() {
     setOrderStep((prevState) => prevState + 1);
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(e);
+    // if (input === '') {
+    //   return;
+    // }
+    // setInput('');
+    // onAddItem(input);
+  };
+
   return (
     <div className='app' data-theme={theme}>
       <Header toggleTheme={toggleTheme} />
       <main className='site-main'>
         <div className='main-container d-flex flex-row '>
-          <RegisterContainer>
+          <RegisterContainer submitHandler={submitHandler}>
             <ProgressBar orderStep={orderStep} />
-            <StepContent orderStep={orderStep} />
+            <StepContent orderStep={orderStep} submitHandler={submitHandler} />
           </RegisterContainer>
           <CartContainer />
           <StepControl

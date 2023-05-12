@@ -41,6 +41,16 @@
   @extend %done-phase;
 }
 
+// form - control show which form
+.address,
+.delivery,
+.payment {
+  display: none;
+}
+.active {
+  display: block;
+}
+
 section.register-container {
   h2.register-title {
     font-weight: 700;

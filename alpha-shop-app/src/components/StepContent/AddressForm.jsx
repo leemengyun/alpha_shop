@@ -1,4 +1,11 @@
-export default function AddressForm({ userData, onHandleInputChange }) {
+// import { useState } from 'react';
+// import { cardDetails } from '../CarContainer/CartContext';
+
+export default function AddressForm() {
+  // console.log(cardDetails);
+
+  // console.log(userData.cardHolderName);
+  // const submitHandler = () => {};
   return (
     <form className='col col-12'>
       <h3 className='form-title'>寄送地址</h3>
@@ -24,14 +31,7 @@ export default function AddressForm({ userData, onHandleInputChange }) {
         <div className='col col-12'>
           <div className='input-group input-w-lg-3 input-w-sm-full'>
             <div className='input-label'>電話</div>
-            <input
-              type='tel'
-              placeholder='請輸入行動電話'
-              name='tel'
-              value={userData.tel}
-              // 表單切換保留處理
-              onChange={onHandleInputChange}
-            />
+            <input type='tel' placeholder='請輸入行動電話' name='tel' />
           </div>
           <div className='input-group input-w-lg-3 input-w-sm-full'>
             <div className='input-label'>Email</div>
@@ -82,9 +82,9 @@ export default function AddressForm({ userData, onHandleInputChange }) {
               type='text'
               placeholder='請輸入地址'
               name='address'
-              key='address'
+              // key='address'
               // 表單切換保留處理
-              value={userData.address || ''}
+              // value={userData.address || ''}
               // onChange={onHandleInputChange}
             />
           </div>
