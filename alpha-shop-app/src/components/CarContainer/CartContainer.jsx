@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { dummyShopping } from './CartContext';
 
@@ -48,8 +48,18 @@ function ProductTemplate({
   );
 }
 
-export default function CartContainer() {
+export default function CartContainer({ totalPrice, setTotalPrice }) {
   const [shopping, setShopping] = useState(dummyShopping);
+
+  useEffect(() => {
+    const countTotalPrice = shopping.reduce(
+      (prev, current) => prev + current.price * current.quantity,
+      0
+    );
+    setTotalPrice(countTotalPrice);
+  }, [shopping, setTotalPrice]);
+
+  // 改為Array.reduce的method來寫
 
   function handleIncreaseCount(productId) {
     // console.log(productId);
@@ -65,6 +75,8 @@ export default function CartContainer() {
         }
       })
     );
+
+    // setTotalPrice(countTotalPrice);
   }
 
   function handleDecreaseCount(productId) {
@@ -85,13 +97,9 @@ export default function CartContainer() {
         return q.quantity > 0;
       })
     );
-  }
 
-  // 改為Array.reduce的method來寫
-  const totalPrice = shopping.reduce(
-    (prev, current) => prev + current.price * current.quantity,
-    0
-  );
+    // setTotalPrice(countTotalPrice);
+  }
 
   return (
     <section className='cart-container col col-lg-5 col-sm-12'>

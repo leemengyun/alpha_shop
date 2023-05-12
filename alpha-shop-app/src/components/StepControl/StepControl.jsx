@@ -25,7 +25,7 @@ export default function StepControl({
         )}
         {orderStep !== 3 && (
           <button className='next' onClick={nextStepFunc}>
-            `下一步`
+            下一步
             <img
               src={iconRightArrow}
               alt='icon of right arrow'
@@ -34,8 +34,13 @@ export default function StepControl({
           </button>
         )}
         {orderStep === 3 && (
-          <button className='next' onClick={submitHandler}>
-            `確認下單`
+          <button
+            form='hook-form'
+            className='next'
+            // onClick={submitHandler}
+            type='submit'
+          >
+            確認下單
             <img
               src={iconRightArrow}
               alt='icon of right arrow'

@@ -16,11 +16,28 @@ const dummyShopping = [
   },
 ];
 
-const cardDetails = {
+const initialCardDetails = {
+  orderPrice: 200,
   cardHolderName: 'eva Lee',
   cardNum: '1234 5678 9012 3456',
-  cardExpireDate: '03/33',
+  cardExpireDate: 'MM/YY',
   cardCvc: '333',
 };
 
-export { dummyShopping, cardDetails };
+const cardDetails = {
+  orderPrice: 0,
+  cardHolderName: '',
+  cardNum: '',
+  cardExpireDate: '',
+  cardCvc: '',
+};
+
+// const initialCardDetails = {
+//   orderPrice: 200,
+//   cardHolderName: 'eva Lee',
+//   cardNum: '1234 5678 9012 3456',
+//   cardExpireDate: 'MM/YY',
+//   cardCvc: '333',
+// };
+
+export { dummyShopping, initialCardDetails, cardDetails };

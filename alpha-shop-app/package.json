@@ -40,6 +40,7 @@
     ]
   },
   "dependencies": {
+    "react-hook-form": "^7.43.9",
     "use-local-storage": "^3.0.0"
   }
 }

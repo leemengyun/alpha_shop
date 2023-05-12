@@ -1,5 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import { cardDetails } from './components/CarContainer/CartContext';
+// react-hook-form
+import { useForm } from 'react-hook-form';
 
 // css
 import './styles/main.scss';
@@ -16,6 +19,19 @@ import Footer from './components/Footer/Footer';
 function App() {
   //change Darkmode
   const [theme, setTheme] = useState('light');
+  const [orderStep, setOrderStep] = useState(1);
+  const [paymentData, setPaymentData] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const { reset } = useForm();
+  // const[cardDetails,]
+  // react--form
+  const { resetField } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      cardHolderName: '',
+    },
+  });
+
   const toggleTheme = () => {
     if (theme === 'light') {
       document.body.dataset.theme = 'dark';
@@ -26,11 +42,10 @@ function App() {
     }
   };
 
-  const [orderStep, setOrderStep] = useState(1);
-
   const prevStepFunc = () => {
     setOrderStep((prevState) => prevState - 1);
   };
+
   const nextStepFunc = () => {
     if (orderStep === 3) {
       return;
@@ -40,14 +55,23 @@ function App() {
     setOrderStep((prevState) => prevState + 1);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(e);
-    // if (input === '') {
+  const submitHandler = (data) => {
+    // alert('in submitHandler');
+    console.log(data);
+    // console.log(data.cardHolderName);
+    // if (!data) {
     //   return;
     // }
     // setInput('');
     // onAddItem(input);
+    console.log(cardDetails);
+    // console.log(cardDetails.orderPrice);
+    cardDetails.orderPrice = totalPrice;
+    cardDetails.cardHolderName = data.cardHolderName;
+    cardDetails.cardNum = data.cardNum;
+    cardDetails.cardExpireDate = data.cardExpireDate;
+    cardDetails.cardCvc = data.cardCvc;
+    // reset();
   };
 
   return (
@@ -57,13 +81,22 @@ function App() {
         <div className='main-container d-flex flex-row '>
           <RegisterContainer submitHandler={submitHandler}>
             <ProgressBar orderStep={orderStep} />
-            <StepContent orderStep={orderStep} submitHandler={submitHandler} />
+            <StepContent
+              orderStep={orderStep}
+              submitHandler={submitHandler}
+              paymentData={paymentData}
+              setPaymentData={setPaymentData}
+            />
           </RegisterContainer>
-          <CartContainer />
+          <CartContainer
+            totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
+          />
           <StepControl
             orderStep={orderStep}
             prevStepFunc={prevStepFunc}
             nextStepFunc={nextStepFunc}
+            submitHandler={submitHandler}
           />
         </div>
       </main>
