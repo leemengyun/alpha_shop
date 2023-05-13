@@ -19,7 +19,7 @@ function App() {
   //change Darkmode
   const [theme, setTheme] = useState('light');
   const [orderStep, setOrderStep] = useState(1);
-  const [orderDataBase, setOrderDataBase] = useState(dataBaseDetails);
+  // const [orderDataBase, setOrderDataBase] = useState(dataBaseDetails);
 
   const [paymentData, setPaymentData] = useState({
     cardHolderName: '',
@@ -68,14 +68,18 @@ function App() {
       cardCvc: cardCvcValue,
     });
 
-    setOrderDataBase(paymentData);
+    // update dataBaseDetails to CartContext.jsx
+    dataBaseDetails.cardHolderName = cardHolderNameValue;
+    dataBaseDetails.cardNum = cardNumValue;
+    dataBaseDetails.cardExpireDate = cardExpireDateValue;
+    dataBaseDetails.cardCvc = cardCvcValue;
+    console.log(dataBaseDetails);
+
     // clear form value
     e.target.cardHolderName.value = '';
     e.target.cardNum.value = '';
     e.target.cardExpireDate.value = '';
     e.target.cardCvc.value = '';
-
-    console.log(orderDataBase);
   };
 
   return (
