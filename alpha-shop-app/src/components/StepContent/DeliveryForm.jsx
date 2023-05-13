@@ -7,7 +7,7 @@ export default function DeliveryForm() {
   const [selected, setSelected] = useState('shipping-standard');
 
   const handleChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSelected(event.target.value);
   };
   return (

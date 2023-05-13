@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+// import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 // css
 import './styles/main.scss';
@@ -12,10 +12,22 @@ import ProgressBar from './components/StepProgressBar/StepProgressBar';
 import StepContent from './components/StepContent/StepContent';
 import StepControl from './components/StepControl/StepControl';
 import Footer from './components/Footer/Footer';
+// import data
+import { dataBaseDetails } from './components/CarContainer/CartContext';
 
 function App() {
   //change Darkmode
   const [theme, setTheme] = useState('light');
+  const [orderStep, setOrderStep] = useState(1);
+  const [orderDataBase, setOrderDataBase] = useState(dataBaseDetails);
+
+  const [paymentData, setPaymentData] = useState({
+    cardHolderName: '',
+    cardNum: '',
+    cardExpireDate: '',
+    cardCvc: '',
+  });
+
   const toggleTheme = () => {
     if (theme === 'light') {
       document.body.dataset.theme = 'dark';
@@ -25,9 +37,6 @@ function App() {
       setTheme('light');
     }
   };
-
-  const [orderStep, setOrderStep] = useState(1);
-
   const prevStepFunc = () => {
     setOrderStep((prevState) => prevState - 1);
   };
@@ -40,14 +49,33 @@ function App() {
     setOrderStep((prevState) => prevState + 1);
   };
 
+  // Payment form submit
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(e);
-    // if (input === '') {
-    //   return;
-    // }
-    // setInput('');
-    // onAddItem(input);
+    // console.log(e);
+    // console.log(e.target.elements);
+
+    const cardHolderNameValue = e.target.cardHolderName.value;
+    const cardNumValue = e.target.cardNum.value;
+    const cardExpireDateValue = e.target.cardExpireDate.value;
+    const cardCvcValue = e.target.cardCvc.value;
+
+    // update setPaymentData
+    setPaymentData({
+      cardHolderName: cardHolderNameValue,
+      cardNum: cardNumValue,
+      cardExpireDate: cardExpireDateValue,
+      cardCvc: cardCvcValue,
+    });
+
+    setOrderDataBase(paymentData);
+    // clear form value
+    e.target.cardHolderName.value = '';
+    e.target.cardNum.value = '';
+    e.target.cardExpireDate.value = '';
+    e.target.cardCvc.value = '';
+
+    console.log(orderDataBase);
   };
 
   return (
@@ -57,13 +85,19 @@ function App() {
         <div className='main-container d-flex flex-row '>
           <RegisterContainer submitHandler={submitHandler}>
             <ProgressBar orderStep={orderStep} />
-            <StepContent orderStep={orderStep} submitHandler={submitHandler} />
+            <StepContent
+              orderStep={orderStep}
+              submitHandler={submitHandler}
+              paymentData={paymentData}
+              setPaymentData={setPaymentData}
+            />
           </RegisterContainer>
-          <CartContainer />
+          <CartContainer paymentData={paymentData} />
           <StepControl
             orderStep={orderStep}
             prevStepFunc={prevStepFunc}
             nextStepFunc={nextStepFunc}
+            submitHandler={submitHandler}
           />
         </div>
       </main>

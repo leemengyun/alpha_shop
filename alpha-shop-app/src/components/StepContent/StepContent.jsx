@@ -5,7 +5,12 @@ import AddressForm from './AddressForm';
 import DeliveryForm from './DeliveryForm';
 import PaymentForm from './PaymentForm';
 
-export default function StepContent({ orderStep, submitHandler }) {
+export default function StepContent({
+  orderStep,
+  submitHandler,
+  paymentData,
+  setPaymentData,
+}) {
   let addressClass = 'address';
   let deliveryClass = 'delivery';
   let paymentClass = 'payment';
@@ -28,7 +33,11 @@ export default function StepContent({ orderStep, submitHandler }) {
         <DeliveryForm />
       </div>
       <div className={paymentClass}>
-        <PaymentForm submitHandler={submitHandler} />
+        <PaymentForm
+          submitHandler={submitHandler}
+          paymentData={paymentData}
+          setPaymentData={setPaymentData}
+        />
       </div>
     </section>
   );

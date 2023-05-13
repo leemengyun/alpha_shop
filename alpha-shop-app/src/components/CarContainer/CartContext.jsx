@@ -16,11 +16,12 @@ const dummyShopping = [
   },
 ];
 
-const cardDetails = {
-  cardHolderName: 'eva Lee',
-  cardNum: '1234 5678 9012 3456',
-  cardExpireDate: '03/33',
-  cardCvc: '333',
+const dataBaseDetails = {
+  // cardPrice: 0,
+  cardHolderName: '',
+  cardNum: '',
+  cardExpireDate: '',
+  cardCvc: '',
 };
 
-export { dummyShopping, cardDetails };
+export { dummyShopping, dataBaseDetails };

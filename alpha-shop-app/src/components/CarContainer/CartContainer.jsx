@@ -48,8 +48,11 @@ function ProductTemplate({
   );
 }
 
-export default function CartContainer() {
+export default function CartContainer(paymentData) {
   const [shopping, setShopping] = useState(dummyShopping);
+
+  // console.log(wholeData);
+  // console.log(paymentData);
 
   function handleIncreaseCount(productId) {
     // console.log(productId);
