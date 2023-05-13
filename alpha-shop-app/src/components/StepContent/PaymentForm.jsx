@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { initialCardDetails } from '../CarContainer/CartContext';
 
-export default function PaymentForm({ submitHandler }) {
+export default function PaymentForm({ submitHandler, control }) {
   // react-hook-form
   const { register, handleSubmit } = useForm();
 
@@ -23,8 +23,9 @@ export default function PaymentForm({ submitHandler }) {
             <input
               type='text'
               placeholder={initialCardDetails.cardHolderName}
+              required
               // name='cardHolderName'
-              {...register('cardHolderName')}
+              {...register('cardHolderName', { control })}
               // value='Eva Lee'
             />
           </div>
@@ -35,7 +36,8 @@ export default function PaymentForm({ submitHandler }) {
             <input
               type='text'
               placeholder={initialCardDetails.cardNum}
-              {...register('cardNum')}
+              required
+              {...register('cardNum', { control })}
               // name='cardNum'
               // value='1234 5678 9012 3456'
             />
@@ -47,7 +49,7 @@ export default function PaymentForm({ submitHandler }) {
             <input
               type='text'
               placeholder={initialCardDetails.cardExpireDate}
-              {...register('cardExpireDate')}
+              {...register('cardExpireDate', { control })}
 
               // name='cardExpireDate'
               // value='12/25'
@@ -58,7 +60,8 @@ export default function PaymentForm({ submitHandler }) {
             <input
               type='text'
               placeholder={initialCardDetails.cardCvc}
-              {...register('cardCvc')}
+              required
+              {...register('cardCvc', { control })}
 
               // name='cardCvc'
               // value='333'

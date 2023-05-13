@@ -1,8 +1,8 @@
-import React from 'react';
 import { useState } from 'react';
+
 import { cardDetails } from './components/CarContainer/CartContext';
 // react-hook-form
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 // css
 import './styles/main.scss';
@@ -20,17 +20,10 @@ function App() {
   //change Darkmode
   const [theme, setTheme] = useState('light');
   const [orderStep, setOrderStep] = useState(1);
-  const [paymentData, setPaymentData] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
-  const { reset } = useForm();
-  // const[cardDetails,]
-  // react--form
-  const { resetField } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      cardHolderName: '',
-    },
-  });
+  // const [originalData, setOriginalData] = useState(cardDetails);
+  // const { reset, control } = useForm();
+  // const methods = useForm();
 
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -57,21 +50,34 @@ function App() {
 
   const submitHandler = (data) => {
     // alert('in submitHandler');
-    console.log(data);
-    // console.log(data.cardHolderName);
-    // if (!data) {
-    //   return;
-    // }
-    // setInput('');
-    // onAddItem(input);
-    console.log(cardDetails);
-    // console.log(cardDetails.orderPrice);
+    // console.log(data);
+
     cardDetails.orderPrice = totalPrice;
     cardDetails.cardHolderName = data.cardHolderName;
     cardDetails.cardNum = data.cardNum;
     cardDetails.cardExpireDate = data.cardExpireDate;
     cardDetails.cardCvc = data.cardCvc;
-    // reset();
+
+    // **嘗試1 - 儲存資料 - 但結果要按第二次才會儲存前一次的資料
+    // setOriginalData({
+    //   ...originalData,
+    //   orderPrice: totalPrice,
+    //   cardHolderName: data.cardHolderName,
+    //   cardNum: data.cardNum,
+    //   cardExpireDate: data.cardExpireDate,
+    //   cardCvc: data.cardCvc,
+    // });
+
+    //  **嘗試2 - 清空表單值 沒有成功
+    // reset({
+    //   orderPrice: '',
+    //   cardHolderName: '',
+    //   cardNum: '',
+    //   cardExpireDate: '',
+    //   cardCvc: '',
+    // });
+
+    console.log(cardDetails);
   };
 
   return (
@@ -84,8 +90,9 @@ function App() {
             <StepContent
               orderStep={orderStep}
               submitHandler={submitHandler}
-              paymentData={paymentData}
-              setPaymentData={setPaymentData}
+              // control={control}
+              // paymentData={paymentData}
+              // setPaymentData={setPaymentData}
             />
           </RegisterContainer>
           <CartContainer

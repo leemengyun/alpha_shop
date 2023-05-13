@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useForm } from 'react-hook-form';
 
 // import component
 import AddressForm from './AddressForm';
@@ -8,6 +9,7 @@ import PaymentForm from './PaymentForm';
 export default function StepContent({
   orderStep,
   submitHandler,
+  control,
   // paymentData,
   // setPaymentData,
 }) {
@@ -33,7 +35,7 @@ export default function StepContent({
         <DeliveryForm />
       </div>
       <div className={paymentClass}>
-        <PaymentForm submitHandler={submitHandler} />
+        <PaymentForm submitHandler={submitHandler} control={control} />
       </div>
     </section>
   );
