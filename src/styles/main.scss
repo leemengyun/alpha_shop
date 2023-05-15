@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './base.scss';
+@import './header.scss';
+@import './form.scss';
+@import './register.scss';
+@import './cart.scss';
+@import './footer.scss';
+@import './dark-theme.scss';
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+
+//Component Custom Css
+@import '../components/Header/Header.module.scss';
+@import '../components/StepProgressBar/StepProgressBar.module.scss';
