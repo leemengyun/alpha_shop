@@ -4,12 +4,24 @@ import { useForm } from 'react-hook-form';
 
 import { initialCardDetails } from '../CarContainer/CartContext';
 
-export default function PaymentForm({ submitHandler, control }) {
+export default function PaymentForm({ submitHandler }) {
   // react-hook-form
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+
+  const handleFormSubmit = (data) => {
+    submitHandler(data);
+    reset();
+    console.log(reset);
+    // reset({
+    //   // orderPrice: '',
+    //   cardHolderName: '',
+    //   cardNum: '',
+    //   cardExpireDate: '',
+    //   cardCvc: '',
+    // });
+  };
 
   return (
-    // onSubmit={handleSubmit(onSubmit)}
     <form
       id='hook-form'
       className='col col-12'
@@ -25,7 +37,7 @@ export default function PaymentForm({ submitHandler, control }) {
               placeholder={initialCardDetails.cardHolderName}
               required
               // name='cardHolderName'
-              {...register('cardHolderName', { control })}
+              {...register('cardHolderName')}
               // value='Eva Lee'
             />
           </div>
@@ -37,7 +49,7 @@ export default function PaymentForm({ submitHandler, control }) {
               type='text'
               placeholder={initialCardDetails.cardNum}
               required
-              {...register('cardNum', { control })}
+              {...register('cardNum')}
               // name='cardNum'
               // value='1234 5678 9012 3456'
             />
@@ -49,7 +61,7 @@ export default function PaymentForm({ submitHandler, control }) {
             <input
               type='text'
               placeholder={initialCardDetails.cardExpireDate}
-              {...register('cardExpireDate', { control })}
+              {...register('cardExpireDate')}
 
               // name='cardExpireDate'
               // value='12/25'
@@ -61,7 +73,7 @@ export default function PaymentForm({ submitHandler, control }) {
               type='text'
               placeholder={initialCardDetails.cardCvc}
               required
-              {...register('cardCvc', { control })}
+              {...register('cardCvc')}
 
               // name='cardCvc'
               // value='333'

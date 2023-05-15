@@ -2,9 +2,8 @@ import { useState } from 'react';
 
 import { cardDetails } from './components/CarContainer/CartContext';
 // react-hook-form
-// import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
-// css
 // css
 import './styles/main.scss';
 
@@ -23,8 +22,8 @@ function App() {
   const [orderStep, setOrderStep] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   // const [originalData, setOriginalData] = useState(cardDetails);
-  // const { reset, control } = useForm();
-  // const methods = useForm();
+  // const { form } = useForm();
+  const { reset } = useForm();
 
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -59,25 +58,14 @@ function App() {
     cardDetails.cardExpireDate = data.cardExpireDate;
     cardDetails.cardCvc = data.cardCvc;
 
-    // **嘗試1 - 儲存資料 - 但結果要按第二次才會儲存前一次的資料
-    // setOriginalData({
-    //   ...originalData,
-    //   orderPrice: totalPrice,
-    //   cardHolderName: data.cardHolderName,
-    //   cardNum: data.cardNum,
-    //   cardExpireDate: data.cardExpireDate,
-    //   cardCvc: data.cardCvc,
-    // });
-
     //  **嘗試2 - 清空表單值 沒有成功
-    // reset({
-    //   orderPrice: '',
-    //   cardHolderName: '',
-    //   cardNum: '',
-    //   cardExpireDate: '',
-    //   cardCvc: '',
-    // });
-
+    reset({
+      // orderPrice: '',
+      cardHolderName: '',
+      cardNum: '',
+      cardExpireDate: '',
+      cardCvc: '',
+    });
     console.log(cardDetails);
   };
 
@@ -91,9 +79,7 @@ function App() {
             <StepContent
               orderStep={orderStep}
               submitHandler={submitHandler}
-              // control={control}
-              // paymentData={paymentData}
-              // setPaymentData={setPaymentData}
+              reset={reset}
             />
           </RegisterContainer>
           <CartContainer
